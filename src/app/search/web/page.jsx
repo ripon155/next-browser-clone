@@ -1,4 +1,8 @@
+import WebSearchResults from "@/components/WebSearchResults";
+
 async function WebSearch({ searchParams }) {
+  await new Promise((resolve) => setTimeout(resolve, 10000));
+
   const response = await fetch(
     `https://www.googleapis.com/customsearch/v1?key=${process.env.API_KEY}&cx=${process.env.CONTEXT_KEY}&q=${searchParams.search}`
   );
@@ -20,7 +24,7 @@ async function WebSearch({ searchParams }) {
     renderData = <h1>No data found</h1>;
   }
 
-  return <div>{renderData}</div>;
+  return <div>{results && <WebSearchResults results={data} />}</div>;
 }
 
 export default WebSearch;
